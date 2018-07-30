@@ -119,9 +119,11 @@
 		<?php endforeach; ?>
     <div id="_modules">
       <h2><?php echo __('_activated') . '&nbsp;' . __('_modules'); ?></h2>
+      <?php if ( function_exists( 'apache_get_modules' ) ) { ?>
       <?php foreach( apache_get_modules() as $item ): ?>
         <b><?php echo $item; ?></b>
       <?php endforeach; ?>
+      <?php }; ?>
       <br class="clr"/>
     </div>
     <div id="_extension">
@@ -137,7 +139,11 @@
         <span><?php echo $item; ?><i><?php echo i($item);?></i></span>
       <?php endforeach; ?>
       <span><?php echo __('php_version'); ?><i><?php echo PHP_VERSION; ?></i></span>
+      <?php if (function_exists( 'apache_get_version' )) { ?>
       <span><?php echo __('apache_token'); ?><i><?php echo apache_get_version(); ?></i></span>
+      <?php } else { ?>
+      <span><?php echo __('server_software'); ?><i><?php echo $_SERVER['SERVER_SOFTWARE']; ?> </i></span>
+      <?php }; ?>
     </div>
 	</div>
 </body>
